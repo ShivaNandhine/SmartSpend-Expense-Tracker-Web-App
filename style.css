@@ -1,0 +1,614 @@
+/* ======= Global Reset ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f4f6f8;
+  color: #2c3e50;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ======= Navbar ======= */
+/* === Navbar === */
+.navbar {
+  background-color: #ffffff;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode navbar */
+body.dark .navbar {
+  background-color: #2c2c2c;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+
+/* === Logo section === */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.navbar .logo h1 {
+  font-size: 24px;
+  color: #1abc9c;
+}
+
+/* === Dark Mode Toggle Button === */
+.dark-mode-toggle button {
+  background-color: #1abc9c;
+  color: white;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode-toggle button:hover {
+  background-color: #16a085;
+}
+
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  background-color: #1abc9c;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0); /* slide down from top */
+}
+
+/* ======= Summary Section ======= */
+.summary-section {
+  display: flex;
+  gap: 24px;
+  justify-content: space-around;
+  margin: 32px auto;
+  max-width: 1000px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 300px;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.balance-card {
+  background-color: #ebf5fb;
+}
+.income-card {
+  background-color: #e9f7ef;
+}
+.expense-card {
+  background-color: #fdedec;
+}
+
+.card h3 {
+  font-size: 18px;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* ======= Form Section ======= */
+.transaction-form-section {
+  background-color: #ffffff;
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.transaction-form-section h2 {
+  margin-bottom: 16px;
+  font-size: 22px;
+}
+
+#transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#transaction-form input,
+#transaction-form select,
+#transaction-form button {
+  padding: 12px;
+  border: 1px solid #d0d3d4;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+
+#transaction-form input:focus,
+#transaction-form select:focus {
+  outline: 2px solid #1abc9c;
+}
+
+
+
+.custom-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select {
+  width: 100%;
+  background: #ffffff;
+  padding: 12px;
+  border: 1px solid #d0d3d4;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #2c3e50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.custom-select:hover,
+.custom-select.open {
+  outline: 2px solid #1abc9c;
+}
+
+.custom-select .arrow{
+  font-size: 14px;
+  color: #888;
+}
+
+.select-options {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #d0d3d4;
+  border-radius: 8px;
+  margin-top: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  z-index: 100;
+}
+
+.select-options li {
+  padding: 12px;
+  font-size: 14px;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.select-options li:hover {
+  background-color: #f4f6f8;
+}
+
+.custom-select.open + .select-options {
+  display: block;
+}
+
+/* Remove scrollbar (optional and aesthetic) */
+.select-options::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+.select-options {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Ensure consistency with form */
+#transaction-form .custom-select-wrapper {
+  width: 100%;
+}
+
+
+#transaction-form button {
+  background-color: #1abc9c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#transaction-form button:hover {
+  background-color: #16a085;
+}
+
+/* ======= Transaction List Section ======= */
+.transaction-list-section {
+  max-width: 800px;
+  margin: 32px auto;
+  padding: 16px;
+}
+
+.transaction-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Base wrapper */
+.custom-filter-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 16px 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Dropdown head */
+.custom-filter {
+  background: #fff;
+  border: 1px solid #d0d3d4;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+.custom-filter:hover {
+  border-color: #1abc9c;
+  box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.1);
+}
+
+.arrow {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+/* Options list */
+.filter-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #d0d3d4;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: none;
+  z-index: 999;
+}
+
+.filter-options li {
+  padding: 12px;
+  font-size: 14px;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.filter-options li:hover,
+.filter-options li.active {
+  background-color: #e8f9f6;
+  color: #1abc9c;
+}
+
+/* Toggle open */
+.custom-filter-wrapper.open .filter-options {
+  display: block;
+}
+
+/* Dark mode */
+body.dark .custom-filter {
+  background: #1f1f1f;
+  color: #ecf0f1;
+  border: 1px solid #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);;
+}
+
+body.dark .arrow {
+  color: #bdc3c7;
+}
+
+body.dark .filter-options {
+  background: #1f1f1f;
+  border: 1px solid #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .filter-options li {
+  color: #ecf0f1;
+}
+
+body.dark .filter-options li:hover,
+body.dark .filter-options li.active {
+  background-color: #1abc9c;
+  color: #fff;
+}
+
+.filter-options {
+  /* your existing styles */
+  overflow-y: auto;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* Internet Explorer 10+ */
+}
+
+.filter-options::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari */
+}
+
+
+#transaction-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#transaction-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease;
+}
+
+#transaction-list li .category-icon {
+  margin-right: 8px;
+}
+
+#transaction-list li .amount {
+  font-weight: bold;
+}
+
+#transaction-list li .amount.income {
+  color: #27ae60;
+}
+#transaction-list li .amount.expense {
+  color: #c0392b;
+}
+
+/* ======= Animations ======= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 768px) {
+  .summary-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .transaction-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* ======= Dark Mode (Optional Support) ======= */
+body.dark {
+  background-color: #1c1c1c;
+  color: #ececec;
+}
+
+body.dark .card,
+body.dark .transaction-form-section,
+body.dark #transaction-list li {
+  background-color: #2c2c2c;
+  color: #ececec;
+}
+
+body.dark .card h3{
+  color: #ececec;
+}
+body.dark #transaction-form input,
+body.dark #transaction-form select {
+  background-color: #1f1f1f;
+  color: #ececec;
+  border: 1px solid #444;
+}
+
+/* === Dark Mode Dropdown Styling === */
+body.dark .custom-select {
+  background-color: #1f1f1f;
+  border: 1px solid #444;
+  color: #ececec;
+}
+
+body.dark .custom-select .arrow {
+  color: #bbb;
+}
+
+body.dark .select-options {
+  background-color: #1f1f1f;
+  border: 1px solid #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+body.dark .select-options li {
+  color: #ececec;
+}
+
+body.dark .select-options li:hover {
+  background-color: #3a3a3a;
+  color: #1abc9c;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 300px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#confirm-yes {
+  background-color: #e74c3c;
+  color: white;
+}
+
+#confirm-no {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+/* Dark mode for modal */
+body.dark .modal-box {
+  background: #2c3e50;
+  color: #ecf0f1;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+}
+
+body.dark .modal-actions button {
+  color: white;
+}
+
+body.dark #confirm-no {
+  background-color: #7f8c8d;
+}
+
+body.dark #confirm-yes {
+  background-color: #c0392b;
+}
+
+#transaction-form input[type="date"] {
+  color: #2c3e50;
+  background-color: #ffffff;
+  border: 1px solid #d0d3d4;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+}
+body.dark #transaction-form input[type="date"] {
+  color: #ecf0f1;
+}
+
+/* Optional: remove default inner shadow for better visibility */
+body.dark input[type="date"]::-webkit-inner-spin-button,
+body.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* flips calendar icon color to white */
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+body.dark .delete-btn {
+  color: #ff7675;
+}
+
+body.dark .delete-btn:hover {
+  background-color: rgba(255, 118, 117, 0.15);
+}
